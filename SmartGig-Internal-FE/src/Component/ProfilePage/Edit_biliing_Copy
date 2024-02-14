@@ -1,0 +1,374 @@
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import moment from 'moment';
+import { toast } from 'react-toastify';
+
+const initialData = {
+    day: 0,
+    noOfLeaves: 0,
+    totalDays: 0,
+    dayRate: 0,
+    totalAmount: 0
+}
+const initialDate = {
+    fromDate: "",
+    toDate: ""
+}
+
+export default function Edit_Biliing() {
+
+    const [DaysDifference, setDaysDifference] = useState(window.localStorage.getItem("DAYS"));
+    const [TotalDays, setTotalDays] = useState(window.localStorage.getItem("TOTAL_DAYS"));
+    const [TotalAmount, setTotalAmount] = useState(window.localStorage.getItem("TOTAL_AMOUNT"));
+
+    const [datalist, setDatalist] = useState([]);
+
+    const [project, setProject] = useState([]);
+    const [techemployee, setTechemployee] = useState([]);
+
+    const [startDateBkend, setStartDateBkend] = useState();
+    const [endDateBkend, setEndDateBkend] = useState();
+
+    const [{ fullName, clientName, projectName }, setUpdate] = useState({
+        fullName: "",
+        clientName: "",
+        projectName: ""
+    });
+
+    const navigate = useNavigate();
+    const [data, setData] = useState(initialData);
+    const [date, setDate] = useState(initialDate);
+
+    let {
+        dayRate,
+        noOfLeaves,
+    } = data;
+
+    let {
+        fromDate,
+        toDate,
+    } = date;
+
+    useEffect(() => {
+
+        setData({
+
+            dayRate: window.localStorage.getItem("DAY_RATE"),
+            DaysDifference: window.localStorage.getItem("DAYS"),
+            noOfLeaves: window.localStorage.getItem("NO_OF_LEAVES"),
+            TotalAmount: window.localStorage.getItem("TOTAL_AMOUNT"),
+            TotalDays: window.localStorage.getItem("TOTAL_DAYS"),
+        })
+
+        setDate({
+            fromDate: moment(window.localStorage.getItem("FROM_DATE")).format('YYYY-MM-DD'),
+            toDate: moment(window.localStorage.getItem("TO_DATE")).format('YYYY-MM-DD'),
+        })
+
+        setUpdate({
+            fullName: window.localStorage.getItem("EMPLOYEE_NAME"),
+            clientName: window.localStorage.getItem("CLIENT_NAME"),
+            projectName: window.localStorage.getItem("PROJECT_NAME"),
+        })
+
+    }, [])
+
+    const inputHandle = (e) => {
+        setData({
+            ...data,
+            [e.target.name]: [e.target.value]
+        })
+    }
+
+    const inputHandleDays = (e) => {
+        setDate({
+            ...date,
+            [e.target.name]: [e.target.value]
+        })
+
+        if ((Math.abs(new Date(document.getElementById("firstdate").value))) < (Math.abs(new Date(startDateBkend)))) {
+            window.confirm(`From Date should be after (${moment(startDateBkend).format("Do MMM, YYYY")})`)
+            { (setDate(initialDate)) }
+        }
+
+        if ((Math.abs(new Date(new Date(document.getElementById("firstdate").value)))) > (Math.abs(new Date(endDateBkend)))) {
+            window.confirm(` From Date should be less than (${moment(endDateBkend).format("Do MMM, YYYY")})`)
+            { (setDate(initialDate)) }
+        }
+        datediffFn();
+
+    }
+
+    const inputHandleDays1 = (e) => {
+        setDate({
+            ...date,
+            [e.target.name]: [e.target.value]
+        })
+
+        if ((Math.abs(new Date(document.getElementById("seconddate").value))) > (Math.abs((moment(Math.abs(new Date(endDateBkend))).add(1, "days"))._d))) {
+            window.confirm(`To Date should be Before (${moment(endDateBkend).format("Do MMM, YYYY")})`)
+            { (setDate(initialDate)) }
+        }
+
+        if ((Math.abs(new Date(new Date(document.getElementById("seconddate").value)))) < (Math.abs(new Date(startDateBkend)))) {
+            window.confirm(` To Date should be greater than (${moment(startDateBkend).format("Do MMM, YYYY")})`)
+            { (setDate(initialDate)) }
+        }
+
+        datediffFn();
+
+    }
+
+    const inputHandleTotaldays = (e) => {
+        setData({
+            ...data,
+            [e.target.name]: [e.target.value]
+        })
+        TotaldaysFn();
+    }
+
+    const inputHandleTotalAmount = (e) => {
+        setData({
+            ...data,
+            [e.target.name]: [e.target.value]
+        })
+        TotalAmountFn();
+    }
+
+    function handleProjectChange(event) {
+        setUpdate(data => ({ ...data, projectName: event.target.value }));
+    }
+
+    function handleClientChange(event) {
+        setUpdate(data => ({ projectName: '', clientName: event.target.value }));
+    }
+
+    const handleDateCompare = () => {
+        axios.get(`${global.API_URL}/smg/billing/getProjectAssignedDate?clientName=${clientName}&fullname=${fullName}&projectName=${projectName}`,
+            {
+                headers: {
+                    'Authorization': `Bearer ${JSON.parse(window.localStorage.getItem("TOKEN"))}`
+                }
+            })
+            .then((res) => {
+                setStartDateBkend(res.data.startdate)
+                setEndDateBkend(res.data.endDate)
+            })
+            .catch((err) => {
+                console.log("Err", err);
+            })
+    }
+    useEffect(() => {
+
+        if (projectName) {
+            handleDateCompare();
+        }
+    }, [projectName])
+
+
+    const handleEditClient = (e) => {
+        e.preventDefault();
+        axios.put(`${global.API_URL}/smg/billing/editEmployeeBill/${localStorage.getItem("BILL_ID")}`, {
+            fullName: `${fullName}`,
+            clientName: `${clientName}`,
+            projectName: `${projectName}`,
+            day: `${DaysDifference}`,
+            noOfLeaves: `${noOfLeaves}`,
+            totalDays: `${TotalDays}`,
+            dayRate: `${dayRate}`,
+            fromDate: `${fromDate}`,
+            toDate: `${toDate}`,
+            totalAmount: `${TotalAmount}`
+        }, {
+            headers: {
+                'Authorization': `Bearer ${JSON.parse(window.localStorage.getItem("TOKEN"))}`
+            }
+        })
+            .then((res) => {
+                // console.log("response", res.data);
+                toast.success("Billing Info Updated Successfully")
+                navigate("/profilepage/billing")
+            })
+            .catch((err) => {
+                console.log("error", err);
+            })
+    }
+
+    useEffect(() => {
+        const GetProjectDetails = () => {
+            axios.get(`${global.API_URL}/smg/project/getAllProjectDetails`, {
+                headers: {
+                    'Authorization': `Bearer ${JSON.parse(window.localStorage.getItem("TOKEN"))}`
+                }
+            }).then((res) => {
+                const data = res.data
+                // console.log("Fetch successfully", data);
+                let result = data.filter(items => items.projectStatus !== "Completed")
+                setProject(result);
+            }).catch((err) => {
+                console.log("some error", err);
+            })
+        }
+
+        const GetEmpDetails = () => {
+            axios.get(`${global.API_URL}/smg/employee/getTechEmp`, {
+                headers: {
+                    'Authorization': `Bearer ${JSON.parse(window.localStorage.getItem("TOKEN"))}`
+                }
+            }).then((res) => {
+                setTechemployee(res.data)
+            }).catch((err) => {
+                console.log("some error", err);
+            })
+        }
+
+        GetProjectDetails();
+        GetEmpDetails();
+        // GetAssignData();
+    }, []);
+
+    const GetClientProjectDetails = () => {
+        axios.get(`${global.API_URL}/smg/billing/getEmpProject/${fullName}`, {
+            headers: {
+                'Authorization': `Bearer ${JSON.parse(window.localStorage.getItem("TOKEN"))}`
+            }
+        }).then((res) => {
+            setDatalist(res.data)
+        }).catch((err) => {
+            console.log("some error", err);
+        })
+    }
+
+    useEffect(() => {
+        if (fullName) {
+            GetClientProjectDetails();
+        }
+    }, [fullName])
+
+
+    const datediffFn = () => {
+
+        const d1 = document.getElementById("firstdate").value;
+        const d2 = document.getElementById("seconddate").value;
+        const Date1 = new Date(d1);
+        const Date2 = new Date(d2);
+
+        const time = Math.abs(Date2 - Date1);
+        const DaysDiff = Math.ceil(time / (1000 * 60 * 60 * 24))
+
+        document.getElementById("DAYS").innerHTML = DaysDiff
+        setDaysDifference(DaysDiff);
+    }
+
+    const TotaldaysFn = () => {
+        const d1 = document.getElementById("DAYS").value;
+        const d2 = document.getElementById("TotalLeaves").value;
+        const totalDays = d1 - d2;
+        setTotalDays(totalDays);
+    }
+
+    const TotalAmountFn = () => {
+
+        const totalDays = document.getElementById("TotalDays").value;
+        const PerDayRate = document.getElementById("PerDayRate").value;
+
+        const TotalAmt = totalDays * PerDayRate;
+        setTotalAmount(TotalAmt)
+
+    }
+
+    const handlecancel = () => {
+        navigate("/profilepage/billing")
+    }
+
+    return (
+        <div>
+            <div>
+                <form onSubmit={handleEditClient}>
+                    <h5>Billing</h5>
+                    <div className='mainWrapper'>
+                        <div className='innerone'>
+                            <div>
+                                <label className='form-label'> Employee Name <sup>*</sup></label>
+                                <select name="fullName" value={fullName} onChange={inputHandle} className='form-select w-75'>
+                                    <option>select</option>
+                                    {
+                                        techemployee.map((element) => {
+                                            return <option key={element.empId}>{element.fullName}</option>
+                                        })
+                                    }
+                                </select>
+                            </div>
+                            <div className='DateRow'>
+                                <div className='inneronerow'>
+                                    <label className='form-label'>From Date <sup>*</sup></label>
+                                    <input id="firstdate" name="fromDate" value={fromDate} onChange={inputHandleDays} type="date" className="form-control w-75" />
+
+                                </div>
+                                <div className='inneronerow'>
+                                    <label className='form-label'>To Date <sup>*</sup></label>
+                                    <input id="seconddate" name="toDate" value={toDate} onChange={inputHandleDays1} type="date" className="form-control w-75" />
+
+                                </div>
+                            </div>
+                            <div>
+                                <label className='form-label'>Total Days<sup>*</sup></label>
+                                <input type='text' id="TotalDays" value={TotalDays} name='TotalDays' disabled className='form-control w-75' />
+                            </div>
+                        </div>
+                        <div className='innerone'>
+                            <div>
+                                <label className='form-label'> Client Name <sup>*</sup></label>
+                                <select className='form-select w-75' value={clientName} name="clientName" onChange={handleClientChange}>
+                                    <option>select</option>
+                                    {
+                                        datalist.map((data) => {
+                                            return <option key={data.client}>{data.client}</option>
+                                        })
+                                    }
+                                </select>
+                            </div>
+                            <div>
+                                <label className='form-label' >Day<sup>*</sup></label>
+                                <input disabled value={DaysDifference} name="DaysDifference" type='text' id="DAYS" className='form-control w-75' />
+
+                            </div>
+                            <div>
+                                <label className='form-label'>Day/Rate<sup>*</sup></label>
+                                <input type='text' id="PerDayRate" value={dayRate} name="dayRate" onChange={inputHandleTotalAmount} className='form-control w-75' />
+                            </div>
+                        </div>
+                        <div className='innerone'>
+                            <label className='form-label'> Project Name <sup>*</sup></label>
+                            <select className='form-select w-75' value={projectName} name="projectName" onChange={handleProjectChange}>
+                                <option>select</option>
+                                {
+                                    datalist.find(item => item.client === clientName)?.project.map((projectName) => (
+                                        (
+                                            <option key={projectName} value={projectName}>
+                                                {projectName}
+                                            </option>
+                                        )))
+                                }
+                            </select>
+                            <div>
+                                <label className='form-label'>Total no. of Leaves<sup>*</sup></label>
+                                <input type='text' id="TotalLeaves" value={noOfLeaves} name="noOfLeaves" onChange={inputHandleTotaldays} className='form-control w-75' />
+                            </div>
+                            <div>
+                                <label className='form-label'>Total Amount<sup>*</sup></label>
+                                <input type='text' disabled value={TotalAmount} name="TotalAmount" className='form-control w-75' />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='btngroupBilling'>
+                        <button className='btn' type="submit" style={{ backgroundColor: '#225779', color: 'white', }}>Submit</button>
+                        <button className='btn fw-bold' onClick={handlecancel} style={{ backgroundColor: 'white', color: 'black', borderColor: 'red' }}>cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    )
+}

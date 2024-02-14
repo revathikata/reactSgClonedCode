@@ -1,0 +1,37 @@
+.leavefields {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-top: 23px;
+}
+
+.totalleave {
+  background: rgba(192, 190, 190, 0.2);
+  box-shadow: 0px 20px 27px rgba(0, 0, 0, 0.03);
+  border-radius: 16px;
+  width: 200px;
+  padding: 5PX;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.totalleave h6 {
+  font-weight: 600;
+}
+
+.IconImage {
+  background-image: url('https://smartgig-internal-project.s3.ap-south-1.amazonaws.com/birthday+templates/Rectangle.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-right: 10px;
+  margin-top: 10px;
+}
+
+.IconImage img {
+  position: relative;
+  z-index: 1;
+  margin-top: 19px;
+  margin-left: 10px;
+}

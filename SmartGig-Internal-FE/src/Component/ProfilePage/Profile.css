@@ -1,0 +1,683 @@
+.profileMain {
+  background: #f2f5f8;
+  width: 100vw;
+  padding: 10px;
+  gap: 10px;
+  overflow: hidden;
+  position: fixed;
+}
+
+.profSide1 {
+  background: white;
+  width: 20vw;
+  height: auto;
+  border-radius: 7px;
+}
+.profSide2 {
+  width: 100%;
+}
+.sidebar1 {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.profIcons {
+  cursor: pointer;
+}
+.DetailsSection {
+  margin-top: 50px;
+  background-color: white;
+  width: 90vw;
+  border-radius: 10px;
+  height: 70vh;
+  padding: 15px;
+  box-shadow: 0px 2px 0px #e1e3e4;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.sidebar-map {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.80059);
+  box-shadow: 0px 20px 27px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(13.5914px);
+  position: absolute;
+  border-radius: 10px;
+  height: 10vh;
+  width: 88vw;
+  margin-top: 176px;
+  z-index: 1;
+}
+
+.Icons {
+  margin-top: 10px;
+}
+
+.Icons span {
+  color: #18253f;
+  padding: 5px;
+  cursor: pointer;
+  font-size: small;
+}
+
+.sidebar-text img {
+  width: 50px;
+  height: 45px;
+}
+
+.complete-sidebar2 {
+  background-image: url("https://smartgiginternalfrontend.s3.ap-south-1.amazonaws.com/image.png");
+  height: 25vh;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.complete-sidebar3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.complete-sidebar3 img {
+  height: 8.7vh;
+  width: 21vw;
+  position: absolute;
+  top: 27.5%;
+  left: 38.5%;
+  animation: titleHover 10s linear infinite;
+}
+
+@keyframes titleHover {
+  100% {
+    transform: scale(1.5);
+    position: absolute;
+  }
+}
+
+.side2 ul {
+  display: flex;
+  /* border-bottom: 10px solid rgb(255, 47, 47); */
+  margin-left: 30%;
+}
+.side1 ul {
+  display: flex;
+  border-bottom: 10px greenyellow;
+  margin-left: -40%;
+}
+.side1 ul li {
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgb(216, 128, 28);
+  list-style: none;
+  margin: 0 20px;
+  animation: bouncy 10s linear infinite;
+}
+.side2 ul li {
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgb(216, 128, 28);
+  list-style: none;
+  margin: 0 20px;
+  animation: bouncy 10s linear infinite;
+}
+@keyframes bouncy {
+  0% {
+    transform: translateX(-50px);
+  }
+  20% {
+    transform: translateX(-50px);
+  }
+  40% {
+    transform: translateY(-50px);
+  }
+  60% {
+    transform: translateX(50px);
+  }
+  80% {
+    transform: translateY(50px);
+  }
+  100% {
+    transform: translateX(-50px);
+  }
+}
+
+.side1 ul li:nth-child(1) {
+  animation-delay: 0.2s;
+  background-color: #fdcb6e;
+  opacity: 0.2;
+}
+.side1 ul li:nth-child(2) {
+  animation-delay: 0.6s;
+  background-color: #ff7675;
+  opacity: 0.2;
+}
+.side1 ul li:nth-child(3) {
+  animation-delay: 0.4s;
+  background-color: #81ecec;
+  opacity: 0.2;
+}
+.side1 ul li:nth-child(4) {
+  animation-delay: 0.8s;
+  background-color: #55efc4;
+  opacity: 0.2;
+}
+.side2 ul li:nth-child(1) {
+  animation-delay: 0.8s;
+  background-color: #55efc4;
+  opacity: 0.2;
+}
+.side2 ul li:nth-child(2) {
+  animation-delay: 0.4s;
+  background-color: #81ecec;
+  opacity: 0.2;
+}
+.side2 ul li:nth-child(3) {
+  animation-delay: 0.6s;
+  background-color: #ff7675;
+  opacity: 0.2;
+}
+.side2 ul li:nth-child(4) {
+  animation-delay: 0.2s;
+  background-color: #fdcb6e;
+  opacity: 0.2;
+}
+
+/* ====================================== */
+
+.fieldwidth {
+  width: 150px;
+  margin-right: 10px;
+}
+
+/* --------------------------------------------------------------------------------- */
+/* Client From CSS */
+
+.mainWrapper {
+  display: flex;
+  padding: 2px;
+  width: 90vw;
+  padding: 8px;
+}
+.innerone label,
+input {
+  font-family: Open Sans;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.innerone input {
+  border-radius: 10px;
+}
+.inneroneD input {
+  border-radius: 10px;
+}
+.innerone label {
+  font-weight: bold;
+  font-size: medium;
+}
+.innerone,
+.inneroneD {
+  flex: 50%;
+}
+
+.inneroneD label {
+  font-family: Open Sans;
+  font-weight: bold;
+  font-size: medium;
+}
+.inneroneD div {
+  margin-top: 20px;
+}
+sup {
+  color: red;
+}
+
+.btngroup {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 7%;
+  gap: 20px;
+}
+.btngroup button {
+  width: 150px;
+}
+
+/* ------------------------------------------------------------------------------- */
+@media all and (min-width: 750px) and (max-width: 1300px) {
+  .sidebar-map {
+    margin-top: 135px;
+    margin-left: 1%;
+  }
+
+  .Border thead {
+    max-width: 100vw;
+  }
+  .Border {
+    margin: auto;
+    max-width: 100vw;
+  }
+}
+
+/* ====================BillingForm=============== */
+
+.btngroupBilling {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 5%;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+/* ====================================================== */
+/* New Form CSS */
+
+.DateRow {
+  display: flex;
+  width: 25vw;
+}
+
+.inneronerow {
+  flex: 50%;
+}
+
+.Formbtngroup {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 5.5%;
+  gap: 20px;
+}
+.Formbtngroup button,
+.FormbtngroupHL button {
+  width: 160px;
+}
+
+/* /* ================================================================ * */
+/* Employee List */
+
+.heading {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+.Border {
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 15px;
+  margin: auto;
+  max-width: 100vw;
+}
+
+.Border thead th {
+  background: #bbddef;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #252f40;
+  font-size: 15px;
+  width: 100vw;
+}
+.tablecontent {
+  border-collapse: collapse;
+}
+.rowcontect {
+  margin-left: 55px;
+}
+
+tbody td {
+  font-size: 14px;
+  font-family: Open Sans;
+}
+
+.EDIcons {
+  cursor: pointer;
+  text-align: center;
+}
+
+/* ============================================ */
+
+.PopUpDetails {
+  padding: 25px;
+}
+
+.HeadingImage {
+  position: relative;
+}
+.HeadingImage h5 {
+  font-style: Open Sans;
+  font-size: 23px;
+  margin-left: 25%;
+  color: #252f40;
+}
+.HeadingImage img {
+  margin-left: 38%;
+  margin-top: 15px;
+  margin-bottom: 0%;
+  width: 90px;
+  height: 90px;
+  border-radius: 50px;
+}
+.HeadingImage1 h5 {
+  font-style: Open Sans;
+  font-size: 23px;
+  margin-left: 20%;
+  color: #252f40;
+}
+
+.empList {
+  padding-left: 55px;
+}
+.empList span {
+  font-family: Open Sans;
+  color: #2562ab;
+}
+
+/* ==================================================================== */
+/* Project Field */
+
+.ProjectField {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.ClientField {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.ProjectField label {
+  font-family: Open Sans;
+}
+
+.ProjectField input {
+  width: 200px;
+}
+
+.updateproject {
+  display: flex;
+  justify-content: flex-end;
+}
+.Btn {
+  height: 40px;
+  width: 10vw;
+  margin-top: 30px;
+}
+
+/* s */
+
+.SOptions select {
+  width: 200px;
+}
+
+.ClientField input {
+  width: 300px;
+}
+
+.formWrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.formWrapper label {
+  font-family: Open Sans;
+}
+.formWrapper input {
+  width: 250px;
+}
+
+.formWrapper select {
+  width: 250px;
+}
+
+/* ================================ */
+
+/* =Candidate= */
+
+.Candibtngroup {
+  display: flex;
+  margin-right: 2%;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.Candibtngroup button {
+  width: 160px;
+}
+
+.errormsg {
+  color: red;
+  font-size: small;
+  margin-left: 3px;
+}
+
+.candidateProfile p {
+  font-family: Open Sans;
+}
+/* ===================================== */
+
+.dialogbox {
+  width: 35vw !important;
+  height: auto;
+}
+
+#tabinner {
+  background: none;
+  /* background: rgba(187, 220, 223, 0.801);
+box-shadow: 0px 20px 27px rgba(0, 0, 0, 0.05);
+backdrop-filter: blur(13.5914px); */
+}
+
+.tabsnav {
+  border-radius: 5px;
+  width: 30vw;
+  display: flex;
+  justify-content: space-around;
+  font-family: Open Sans;
+  background: #bbddef;
+}
+.tabsnavinner {
+  width: 25vw;
+  display: flex;
+  justify-content: space-around;
+  font-family: Open Sans;
+}
+
+.tabH1:hover {
+  font-weight: 600;
+}
+.tabH2:hover {
+  font-weight: 600;
+}
+.contentDetails {
+  width: 30vw;
+}
+
+.close-button {
+  margin-left: 97%;
+  margin-top: -30px;
+}
+
+.profIconsBg span {
+  display: none;
+}
+
+.profIconsBg:hover span {
+  display: block;
+  font-size: smaller;
+  font-family: arvo;
+}
+
+.IconsBLining,
+.profIconsBg {
+  padding: 7px;
+}
+
+.IconsBLining span {
+  display: none;
+}
+
+.IconsBLining:hover span {
+  display: block;
+  font-size: smaller;
+}
+
+.row label {
+  font-family: Open Sans;
+  font-size: large;
+  color: black;
+  font-weight: 500;
+}
+
+/* ========= DropDown======== */
+ul li {
+  list-style: none;
+  margin: 0 auto;
+  display: inline-block;
+  padding: 0 30px;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  font-family: arvo;
+}
+
+li a {
+  color: black;
+  text-decoration: none;
+}
+
+li a:hover {
+  color: #3ca0e7;
+}
+
+li:hover {
+  cursor: pointer;
+}
+
+ul li ul {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  padding-left: 0;
+  left: 0;
+  display: none;
+  background: white;
+}
+
+ul li:hover > ul,
+ul li ul:hover {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+  min-width: 30px;
+  text-align: left;
+  padding-top: 7px;
+  box-shadow: 0px 8px 8px -1px rgb(205, 128, 105);
+  border-radius: 5px;
+}
+
+ul li ul li {
+  clear: both;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 5px;
+  border-style: none;
+  display: flex;
+}
+
+ul li ul li :hover {
+  padding-left: 10px;
+  border-left: 2px solid #3ca0e7;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #3ca0e7;
+}
+
+ul li ul li {
+  transition: all 0.5s ease;
+}
+
+.searchbox-assignpage {
+  display: flex;
+  justify-content: space-between;
+}
+
+.style {
+  text-decoration: none;
+}
+
+.searchButton {
+  float: right;
+}
+
+/* =================================== */
+
+.profIconsBg img {
+  width: 50px;
+  height: 50px;
+}
+
+.backButton {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+}
+
+.dialogboxImage {
+  width: 35vw !important;
+}
+.laptopField {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.laptopheading th {
+  font-weight: 600;
+  color: #252f40;
+}
+
+.laptopheading th button {
+  background-color: #252f40;
+}
+
+.bell-notification {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: bell 1s linear infinite alternate-reverse;
+  transform-origin: top;
+}
+
+@keyframes bell {
+  0% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+.bell-notification::after {
+  content: attr(current-count);
+  position: absolute;
+  bottom: 13px;
+  right: 42px;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: red;
+  font-size: 10px;
+  font-weight: bolder;
+}

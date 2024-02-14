@@ -1,0 +1,11 @@
+/* * {
+   font-family: "Nunito Sans", sans-serif; 
+} */
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, sans-serif;
+}

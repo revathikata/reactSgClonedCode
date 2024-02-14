@@ -1,0 +1,51 @@
+.LoginContent {
+  text-align: center;
+  width: 100vw;
+  height: 95vh;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+.LoginForm {
+  display: inline-block;
+  border: 1px solid white;
+  width: 28vw;
+  height: auto;
+  margin: auto;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.formInput {
+  margin-top: 55px;
+}
+
+.formInput input {
+  margin-bottom: 15px;
+}
+.form-error {
+  color: red;
+  font-size: smaller;
+  text-align: left;
+}
+
+.Bg-Image {
+  background-image: url("https://smartgiginternalfrontend.s3.ap-south-1.amazonaws.com/SG_Login.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.Logo {
+  width: 18vw;
+  height: 35vh;
+  margin-top: -5%;
+  position: absolute;
+}
+.ImgDiv {
+  position: relative;
+  margin-top: 0%;
+}
